@@ -4,6 +4,7 @@ import { parseStages, consolidateTagsAndFilter, filterByLimitDate, countTeamsTas
 const inputExcel = document.querySelector('#input-excel');
 const inputDate = document.querySelector('#input-date');
 const button = document.querySelector('#button');
+const textArea = document.querySelector('#text-area');
 
 button.addEventListener('click', (e) => {
   const archivo = inputExcel.files[0];
@@ -68,8 +69,7 @@ function renderSummary(stages, summary) {
 
   const teamsHtml = GLOBAL_CONFIG.map(generateTeamLine).join('\n');
 
-  const fullTemplate = `
-<pre>
+  textArea.textContent = `
 _*STATUS DE LAS ASISTENCIAS*_
 
 ▪️ _N° de Asistencias Asignadas:_ *${stages.Asignado.amount}*
@@ -80,7 +80,6 @@ ${teamsHtml}
 ▪️ _Asistencias En Progreso:_ *${stages['En Progreso']?.amount || 0}*
 ▪️ _Asistencias Por Facturar:_ *${stages['Por facturar']?.amount || 0}*
 ▪️ _Clientes atendidos Hoy:_ *${stages['Por facturar'].content.length + stages.Hecho.content.length}*
-</pre>
   `;
 
   document.body.insertAdjacentHTML('beforeend', fullTemplate);
