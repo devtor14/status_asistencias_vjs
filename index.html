@@ -6,13 +6,61 @@
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <input type="file" id="input-excel" accept="xlsx"/>
-    <input type="date" id="input-date" />
-    <button id="button">Procesar Archivo</button>
-    <textarea name="textarea" id="text-area" style="min-width: 300px; width: fit-content; resize: vertical; field-sizing: content;"></textarea>
-    
-    </section>
+    <main>
+      <section class="left-side-content">
+        <label class="input-excel-container">
+          <span>Carga tu archivo <b>.xlsx</b> haciendo click acá</span>
+          <input type="file" id="input-excel" accept=".xlsx" />
+        </label>
+
+        <label class="input-date-container" for="input-date">
+          Selecciona la fecha a evaluar
+          <input type="date" id="input-date" />
+        </label>
+
+        <div class="button-container">
+          <button id="button-start">Procesar archivo</button>
+        </div>
+        <div class="button-container">
+          <button id="button-copy">Copiar datos al portapapeles</button>
+        </div>
+      </section>
+
+      <textarea id="text-area" placeholder="Los resultados aparecerán aquí..."></textarea>
+    </main>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <script src="main.js" type="module"></script>
   </body>
 </html>
+
+<!-- _*STATUS DE LAS ASISTENCIAS*_
+
+▪️ _N° de Asistencias Asignadas:_ *43*
+▪️ _N° Tickets de Asistencias en espera:_ *MANUALMENTE*
+
+▪️ *ARGENIS ACOSTA*: (0)
+▪️ *CG SERVICIOS*: (0)
+▪️ *DAINEE ZAMBRANO*: (0)
+▪️ *GRUPO ARLO*: (0)
+▪️ *INVERSIONES PEÑALVA*: (0)
+▪️ *IVENETI*: (0)RF / (0)FTTH
+▪️ *JERYCO ORTEGA*: (0)
+▪️ *JONAYKER MENDOZA*: (0)
+▪️ *K. SUAREZ*: (0)
+▪️ *KARLANIS TARIFFA*: (0)
+▪️ *KENNY RODRIGUEZ*: (0)RF / (0)FTTH
+▪️ *LATIN TELECOM*: (0)
+▪️ *LFM CONSULTOR*: (0)
+▪️ *MARCIAL RODRIGUEZ*: (0)
+▪️ *MARTIN BOU*: (0)RF / (0)FTTH
+▪️ *MOISES URBINA*: (0)
+▪️ *OSCAR HENRIQUEZ*: (0)
+▪️ *PE*: (0)AOC / (0)FTTH
+▪️ *SMARTLIFE*: (0)RF / (0)FTTH
+▪️ *TERASERVICES VALENCIA*: (0)RF / (0)FTTH
+▪️ *TERASERVICES PUERTO*: (0)RF / (0)FTTH
+▪️ *TERASERVICES ARAGUA*: (0)
+
+▪️ _Asistencias En Progreso:_ *0*
+▪️ _Asistencias Por Facturar:_ *0*
+▪️ _Clientes atendidos Hoy:_ *0* -->

@@ -1,12 +1,16 @@
+import { PLACEHOLDER } from './constants/PLACEHOLDER.js';
 import { GLOBAL_CONFIG, DEFAULT_SUMMARY } from './constants/TEAM_CONFIG.js';
 import { parseStages, consolidateTagsAndFilter, filterByLimitDate, countTeamsTasks } from './helpers/index.js';
 
 const inputExcel = document.querySelector('#input-excel');
 const inputDate = document.querySelector('#input-date');
-const button = document.querySelector('#button');
+const buttonStart = document.querySelector('#button-start');
+const buttonCopy = document.querySelector('#button-copy');
 const textArea = document.querySelector('#text-area');
 
-button.addEventListener('click', (e) => {
+textArea.textContent = PLACEHOLDER;
+
+buttonStart.addEventListener('click', (e) => {
   const archivo = inputExcel.files[0];
   const date = inputDate.value;
 
@@ -26,6 +30,24 @@ button.addEventListener('click', (e) => {
   };
 
   reader.readAsArrayBuffer(archivo);
+  textArea.focus();
+});
+
+buttonCopy.addEventListener('click', async () => {
+  buttonCopy.disabled = true;
+
+  try {
+    await navigator.clipboard.writeText(textArea.value);
+    buttonCopy.innerText = '¡Datos copiados al portapapeles!';
+  } catch (err) {
+    console.error('Error al intentar copiar:', err);
+    buttonCopy.innerText = 'Error al copiar';
+  }
+
+  setTimeout(() => {
+    buttonCopy.innerText = 'Copiar datos al portapapeles';
+    buttonCopy.disabled = false;
+  }, 2000);
 });
 
 function processData(dataList, dateToEval) {
@@ -69,18 +91,14 @@ function renderSummary(stages, summary) {
 
   const teamsHtml = GLOBAL_CONFIG.map(generateTeamLine).join('\n');
 
-  textArea.textContent = `
-_*STATUS DE LAS ASISTENCIAS*_
+  textArea.textContent = `_*STATUS DE LAS ASISTENCIAS*_
 
 ▪️ _N° de Asistencias Asignadas:_ *${stages.Asignado.amount}*
-▪️ _N° Tickets de Asistencias en espera:_ *VALIDAR MANUALMENTE*
+▪️ _N° Tickets de Asistencias en espera:_ *VALIDAR*
 
 ${teamsHtml}
 
 ▪️ _Asistencias En Progreso:_ *${stages['En Progreso']?.amount || 0}*
 ▪️ _Asistencias Por Facturar:_ *${stages['Por facturar']?.amount || 0}*
-▪️ _Clientes atendidos Hoy:_ *${stages['Por facturar'].content.length + stages.Hecho.content.length}*
-  `;
-
-  document.body.insertAdjacentHTML('beforeend', fullTemplate);
+▪️ _Clientes atendidos Hoy:_ *${stages['Por facturar'].content.length + stages.Hecho.content.length}*`;
 }
