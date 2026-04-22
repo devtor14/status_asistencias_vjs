@@ -2,13 +2,26 @@ import { PLACEHOLDER } from './constants/PLACEHOLDER.js';
 import { GLOBAL_CONFIG, DEFAULT_SUMMARY } from './constants/TEAM_CONFIG.js';
 import { parseStages, consolidateTagsAndFilter, filterByLimitDate, countTeamsTasks } from './helpers/index.js';
 
-const inputExcel = document.querySelector('#input-excel');
-const inputDate = document.querySelector('#input-date');
+const inputExcel = document.querySelector('#file-uploader');
+const inputDate = document.querySelector('#date-selector');
 const buttonStart = document.querySelector('#button-start');
 const buttonCopy = document.querySelector('#button-copy');
 const textArea = document.querySelector('#text-area');
 
-textArea.textContent = PLACEHOLDER;
+window.addEventListener('load', () => {
+  inputDate.value = new Date().toLocaleDateString('sv-SE');
+  textArea.textContent = PLACEHOLDER;
+
+  document.body.style.opacity = '1';
+});
+
+inputDate.addEventListener('click', (e) => {
+  e.target.showPicker();
+});
+
+inputExcel.addEventListener('change', (e) => {
+  document.querySelector('#file-name').textContent = e.target.files[0].name;
+});
 
 buttonStart.addEventListener('click', (e) => {
   const archivo = inputExcel.files[0];
@@ -30,7 +43,11 @@ buttonStart.addEventListener('click', (e) => {
   };
 
   reader.readAsArrayBuffer(archivo);
-  textArea.focus();
+  buttonStart.textContent = '¡Archivo procesado!';
+
+  setTimeout(() => {
+    buttonStart.innerText = 'Procesar archivo';
+  }, 2000);
 });
 
 buttonCopy.addEventListener('click', async () => {

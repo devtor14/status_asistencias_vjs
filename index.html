@@ -6,28 +6,35 @@
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <main>
-      <section class="left-side-content">
-        <label class="input-excel-container">
-          <span>Carga tu archivo <b>.xlsx</b> haciendo click acá</span>
-          <input type="file" id="input-excel" accept=".xlsx" />
+    <div class="app-container">
+      <header>
+        <h1>Status de Asistencias</h1>
+        <p>Genera el reporte del SAC rapidamente</p>
+      </header>
+      <main>
+        <label id="file-uploader-container" for="file-uploader" class="file-uploader card">
+          <p>Arrastra y suelta el archivo de Asistencias (.xlsx)</p>
+          o
+          <button>Haz click para buscar el archivo</button>
+          <input id="file-uploader" name="file-uploader" type="file" accept=".xlsx" />
         </label>
-
-        <label class="input-date-container" for="input-date">
-          Selecciona la fecha a evaluar
-          <input type="date" id="input-date" />
-        </label>
-
-        <div class="button-container">
-          <button id="button-start">Procesar archivo</button>
+        <div class="date-selector card">
+          Ingresa la fecha a evaluar
+          <input type="date" id="date-selector" />
         </div>
-        <div class="button-container">
-          <button id="button-copy">Copiar datos al portapapeles</button>
-        </div>
-      </section>
+        <section class="button-container card">
+          <span id="file-name">Ningun archivo cargado</span>
+          <div class="start-button-container">
+            <button id="button-start">Procesar archivo</button>
+          </div>
+          <div class="copy-button-container">
+            <button id="button-copy">Copiar datos al portapapeles</button>
+          </div>
+        </section>
 
-      <textarea id="text-area" placeholder="Los resultados aparecerán aquí..."></textarea>
-    </main>
+        <textarea class="card" id="text-area" readonly></textarea>
+      </main>
+    </div>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <script src="main.js" type="module"></script>
   </body>

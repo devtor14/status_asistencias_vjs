@@ -1,110 +1,154 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  --text: #e9ebea;
-  --bg-primary: #060906;
-  --bg-secondary: #0e110e;
-  --primary: #9dd5a2;
-  --secondary: #0e2b11;
+  --1: #efefef;
+  --2: #1f1f1f;
+  --3: #dcdcdc;
 }
-
 * {
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-  color: var(--text);
-}
-
-body {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: 'Inter', sans-serif;
+}
+body {
   width: 100vw;
   height: 100vh;
   display: grid;
   place-items: center;
-  background-color: var(--bg-primary);
-}
 
-main {
-  width: 85vw;
+  background-color: var(--1);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.app-container {
+  width: auto;
+  height: 90%;
+  max-width: 1280px;
+  max-height: 720px;
+
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: 0.25fr 2fr;
+  grid-template-areas:
+    'header'
+    'main';
+}
+header {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 0.25rem;
+
+  grid-area: header;
+}
+main {
+  grid-area: main;
+
+  display: grid;
   gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content auto auto;
+  grid-template-areas:
+    'file textarea'
+    'date textarea'
+    'button textarea';
+}
+.file-uploader {
+  grid-area: file;
+}
+.date-selector {
+  grid-area: date;
+}
+.button-container {
+  grid-area: button;
+}
+textarea {
+  grid-area: textarea;
 }
 
-.left-side-content {
-  width: fit-content;
+.card {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
-}
 
-.input-excel-container,
-.input-date-container,
-.button-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem 2rem;
-  background-color: var(--bg-secondary);
-  border-radius: 0.8rem;
+  border: 2px solid var(--3);
+  border-radius: 1rem;
+}
+.file-uploader {
   cursor: pointer;
 }
-
-.input-date-container,
-.button-container {
-  flex-direction: row;
-}
-
-input[type='file'] {
-  cursor: pointer;
-  opacity: 0.25;
-}
-
-input[type='file']::-webkit-file-upload-button {
+.file-uploader input {
   display: none;
 }
-
-input[type='date'],
-button,
-textarea {
-  border: none;
-  outline: none;
+.file-uploader > * {
+  text-wrap: pretty;
+  pointer-events: none;
 }
-
-input[type='date'] {
-  width: fit-content;
-  font-weight: 500;
-  text-align: center;
-  border-radius: 0.4rem;
-  background-color: var(--secondary);
-}
-
-input[type='date']::-webkit-calendar-picker-indicator {
-  padding: 0.4rem;
-  background-color: var(--text);
-  cursor: pointer;
-}
-
+.file-uploader button,
+.date-selector input,
 button {
   width: 100%;
-  padding: 1rem;
-  font-weight: 500;
-  color: var(--bg-primary);
-  background-color: var(--primary);
-  border-radius: 0.4rem;
-  cursor: pointer;
-}
-#button-copy {
-  background-color: transparent;
-  border: 1px solid var(--primary);
-  color: var(--primary);
-}
+  padding: 0.6rem;
 
-textarea {
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+
+  outline: none;
+  cursor: pointer;
+  border: none;
+
+  color: var(--1);
+  background-color: var(--2);
+  border-radius: 0.6rem;
+}
+.date-selector input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+.date-selector input[type='date']::-webkit-datetime-edit-fields-wrapper,
+input[type='date']::-webkit-datetime-edit-text,
+input[type='date']::-webkit-datetime-edit-month-field,
+input[type='date']::-webkit-datetime-edit-day-field,
+input[type='date']::-webkit-datetime-edit-year-field {
+  background: none !important;
+  color: inherit !important;
+  pointer-events: none; /* Crucial: hace que los números no reaccionen al clic */
+}
+.button-container span {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+.start-button-container,
+.copy-button-container,
+.start-button-container button,
+.copy-button-container button {
   width: 100%;
-  max-width: fit-content;
-  padding: 1rem;
-  background-color: var(--bg-secondary);
-  border-radius: 0.8rem;
+}
+.copy-button-container button {
+  color: var(--2);
+  background-color: transparent;
+  border: 2px solid var(--2);
+}
+textarea {
+  min-width: fit-content;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  overflow: hidden;
+  field-sizing: none;
   resize: none;
-  field-sizing: content;
+  outline: none;
+
+  background-color: transparent;
 }
