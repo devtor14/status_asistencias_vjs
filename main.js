@@ -15,12 +15,12 @@ window.addEventListener('load', () => {
   document.body.style.opacity = '1';
 });
 
-inputDate.addEventListener('click', (e) => {
-  e.target.showPicker();
-});
-
 inputExcel.addEventListener('change', (e) => {
   document.querySelector('#file-name').textContent = e.target.files[0].name;
+});
+
+inputDate.addEventListener('click', (e) => {
+  e.target.showPicker();
 });
 
 buttonStart.addEventListener('click', (e) => {
@@ -48,6 +48,8 @@ buttonStart.addEventListener('click', (e) => {
   setTimeout(() => {
     buttonStart.innerText = 'Procesar archivo';
   }, 2000);
+
+  buttonCopy.disabled = false;
 });
 
 buttonCopy.addEventListener('click', async () => {
@@ -98,8 +100,8 @@ function renderSummary(stages, summary) {
     }
 
     if (config.id === 'SPECIAL_PE') {
-      const aoc = summary['Ruben Dario Sanchez Avila'] || 0;
-      const ftth = summary['Carlos Gabriel Alquedan Pineda'] || 0;
+      const aoc = (summary['Ruben Dario Sanchez Avila'] || summary['Carlos Gabriel Alquedan Pineda']) || 0;
+      const ftth = 0;
       return `▪️ *PE*: (${aoc})AOC / (${ftth})FTTH`;
     }
 

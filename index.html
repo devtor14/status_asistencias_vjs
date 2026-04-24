@@ -1,73 +1,72 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/main.css" />
-  </head>
-  <body>
-    <div class="app-container">
-      <header>
-        <h1>Status de Asistencias</h1>
-        <p>Genera el reporte del SAC rapidamente</p>
-      </header>
-      <main>
-        <label id="file-uploader-container" for="file-uploader" class="file-uploader card">
-          <p>Arrastra y suelta el archivo de Asistencias (.xlsx)</p>
-          o
-          <button>Haz click para buscar el archivo</button>
-          <input id="file-uploader" name="file-uploader" type="file" accept=".xlsx" />
-        </label>
-        <div class="date-selector card">
-          Ingresa la fecha a evaluar
-          <input type="date" id="date-selector" />
-        </div>
-        <section class="button-container card">
-          <span id="file-name">Ningun archivo cargado</span>
-          <div class="start-button-container">
-            <button id="button-start">Procesar archivo</button>
-          </div>
-          <div class="copy-button-container">
-            <button id="button-copy">Copiar datos al portapapeles</button>
-          </div>
-        </section>
 
-        <textarea class="card" id="text-area" readonly></textarea>
-      </main>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+
+<body>
+  <main class="app-container">
+    <div class="title-container card">
+      <h1>Status de Asistencias</h1>
+      <p>Genera el reporte del SAC rapidamente</p>
     </div>
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-    <script src="main.js" type="module"></script>
-  </body>
-</html>
+    <label id="file-uploader-container" for="file-uploader" class="file-uploader card">
+      <p>Arrastra y suelta el archivo de Asistencias (.xlsx)</p>
+      o
+      <button>Haz click para buscar el archivo</button>
+      <input id="file-uploader" name="_*STATUS DE LAS ASISTENCIAS*_
 
-<!-- _*STATUS DE LAS ASISTENCIAS*_
+▪️ _N° de Asistencias Asignadas:_ *33*
+▪️ _N° Tickets de Asistencias en espera:_ *VALIDAR*
 
-▪️ _N° de Asistencias Asignadas:_ *43*
-▪️ _N° Tickets de Asistencias en espera:_ *MANUALMENTE*
-
-▪️ *ARGENIS ACOSTA*: (0)
+▪️ *JERLIX COLMENARES*: (1)
 ▪️ *CG SERVICIOS*: (0)
 ▪️ *DAINEE ZAMBRANO*: (0)
 ▪️ *GRUPO ARLO*: (0)
-▪️ *INVERSIONES PEÑALVA*: (0)
+▪️ *INVERSIONES PEÑALVA*: (4)
 ▪️ *IVENETI*: (0)RF / (0)FTTH
 ▪️ *JERYCO ORTEGA*: (0)
-▪️ *JONAYKER MENDOZA*: (0)
-▪️ *K. SUAREZ*: (0)
+▪️ *JONAYKER MENDOZA*: (2)
+▪️ *K. SUAREZ*: (2)
 ▪️ *KARLANIS TARIFFA*: (0)
 ▪️ *KENNY RODRIGUEZ*: (0)RF / (0)FTTH
-▪️ *LATIN TELECOM*: (0)
-▪️ *LFM CONSULTOR*: (0)
-▪️ *MARCIAL RODRIGUEZ*: (0)
+▪️ *LATIN TELECOM*: (3)
+▪️ *LFM CONSULTOR*: (2)
+▪️ *MARCIAL RODRIGUEZ*: (3)
 ▪️ *MARTIN BOU*: (0)RF / (0)FTTH
-▪️ *MOISES URBINA*: (0)
-▪️ *OSCAR HENRIQUEZ*: (0)
+▪️ *MOISES URBINA*: (3)
+▪️ *OSCAR HENRIQUEZ*: (3)
 ▪️ *PE*: (0)AOC / (0)FTTH
-▪️ *SMARTLIFE*: (0)RF / (0)FTTH
-▪️ *TERASERVICES VALENCIA*: (0)RF / (0)FTTH
-▪️ *TERASERVICES PUERTO*: (0)RF / (0)FTTH
+▪️ *SMARTLIFE*: (0)RF / (2)FTTH
+▪️ *TERASERVICES VALENCIA*: (0)RF / (2)FTTH
+▪️ *TERASERVICES PUERTO*: (0)RF / (6)FTTH
 ▪️ *TERASERVICES ARAGUA*: (0)
 
 ▪️ _Asistencias En Progreso:_ *0*
-▪️ _Asistencias Por Facturar:_ *0*
-▪️ _Clientes atendidos Hoy:_ *0* -->
+▪️ _Asistencias Por Facturar:_ *58*
+▪️ _Clientes atendidos Hoy:_ *35*file-uploader" type="file" accept=".xlsx" />
+    </label>
+    <div class="date-selector card">
+      Ingresa la fecha a evaluar
+      <input type="date" id="date-selector" />
+    </div>
+    <section class="button-container card">
+      <span id="file-name">Ningun archivo cargado</span>
+      <div class="start-button-container">
+        <button id="button-start">Procesar archivo</button>
+      </div>
+      <div class="copy-button-container">
+        <button id="button-copy" disabled>Copiar datos al portapapeles</button>
+      </div>
+    </section>
+
+    <textarea class="card" id="text-area" readonly></textarea>
+  </main>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+  <script src="main.js" type="module"></script>
+</body>
+
+</html>
