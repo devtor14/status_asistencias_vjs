@@ -3,7 +3,7 @@ export const PLACEHOLDER = `_*STATUS DE LAS ASISTENCIAS*_
 ▪️ _N° de Asistencias Asignadas:_ *0*
 ▪️ _N° Tickets de Asistencias en espera:_ *VALIDAR*
 
-▪️ *ARGENIS ACOSTA*: (0)
+▪️ *JERLIX COLMENARES*: (0)
 ▪️ *CG SERVICIOS*: (0)
 ▪️ *DAINEE ZAMBRANO*: (0)
 ▪️ *GRUPO ARLO*: (0)
