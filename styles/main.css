@@ -3,8 +3,16 @@
 :root {
   --1: #efefef;
   --2: #1f1f1f;
-  --3: #dcdcdc;
+  --3: #1f1f1f1a;
 }
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --1: #1f1f1f;
+    --2: #efefef;
+    --3: #f0f0f00d;
+  }
+} */
+
 * {
   margin: 0;
   padding: 0;
