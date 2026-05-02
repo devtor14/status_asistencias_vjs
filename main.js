@@ -1,123 +1,118 @@
-import { PLACEHOLDER } from './constants/PLACEHOLDER.js';
-import { GLOBAL_CONFIG, DEFAULT_SUMMARY } from './constants/TEAM_CONFIG.js';
-import { parseStages, consolidateTagsAndFilter, filterByLimitDate, countTeamsTasks } from './helpers/index.js';
+import { processData, formatSummary } from './helpers/index.js';
 
-const inputExcel = document.querySelector('#file-uploader');
-const inputDate = document.querySelector('#date-selector');
-const buttonStart = document.querySelector('#button-start');
-const buttonCopy = document.querySelector('#button-copy');
-const textArea = document.querySelector('#text-area');
+const excelInput = document.querySelector('#file-input');
+const yesterdayInput = document.querySelector('#yesterday');
+const yesterdayValue = document.querySelector('#yesterday-value');
+const todayInput = document.querySelector('#today');
+const todayValue = document.querySelector('#today-value');
+const startButton = document.querySelector('#start-button');
+const copyButton = document.querySelector('#copy-button');
+
+const elements = {
+  asignadas: document.querySelector('#asignadas'),
+  progreso: document.querySelector('#progreso'),
+  facturar: document.querySelector('#facturar'),
+  atendidos: document.querySelector('#atendidos'),
+  activas: document.querySelector('#activas'),
+  inactivas: document.querySelector('#inactivas'),
+  fileName: document.querySelector('#file-name'),
+};
+
+let formatedData = '';
 
 window.addEventListener('load', () => {
-  inputDate.value = new Date().toLocaleDateString('sv-SE');
-  textArea.textContent = PLACEHOLDER;
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+
+  const formatISO = (date) => date.toISOString().split('T')[0];
+  const formatDay = (date) => String(date.getDate()).padStart(2, '0');
+
+  todayInput.value = formatISO(today);
+  yesterdayInput.value = formatISO(yesterday);
+  todayValue.textContent = formatDay(today);
+  yesterdayValue.textContent = formatDay(yesterday);
 
   document.body.style.opacity = '1';
 });
 
-inputExcel.addEventListener('change', (e) => {
-  document.querySelector('#file-name').textContent = e.target.files[0].name;
+excelInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) elements.fileName.textContent = file.name;
 });
 
-inputDate.addEventListener('click', (e) => {
-  e.target.showPicker();
-});
+startButton.addEventListener('click', () => {
+  const archivo = excelInput.files[0];
+  const date = document.querySelector('input[type="radio"]:checked')?.value;
 
-buttonStart.addEventListener('click', (e) => {
-  const archivo = inputExcel.files[0];
-  const date = inputDate.value;
-
-  if (!archivo || !date) {
-    alert('Debes cargar un archivo y una fecha');
-    return;
-  }
+  if (!archivo) return alert('Debes cargar un archivo');
 
   const reader = new FileReader();
-
   reader.onload = (evento) => {
     const data = new Uint8Array(evento.target.result);
     const workbook = XLSX.read(data, { type: 'array', cellDates: true });
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
     const dataJSON = XLSX.utils.sheet_to_json(sheet);
-    processData(dataJSON, date);
+
+    const [stages, sumary] = processData(dataJSON, date);
+    formatedData = formatSummary(stages, sumary);
+
+    showOnDashboard(formatedData);
+    copyButton.disabled = false;
   };
 
   reader.readAsArrayBuffer(archivo);
-  buttonStart.textContent = '¡Archivo procesado!';
-
-  setTimeout(() => {
-    buttonStart.innerText = 'Procesar archivo';
-  }, 2000);
-
-  buttonCopy.disabled = false;
 });
 
-buttonCopy.addEventListener('click', async () => {
-  buttonCopy.disabled = true;
+copyButton.addEventListener('click', async () => {
+  if (!formatedData?.report) return;
 
+  copyButton.disabled = true;
   try {
-    await navigator.clipboard.writeText(textArea.value);
-    buttonCopy.innerText = '¡Datos copiados al portapapeles!';
+    await navigator.clipboard.writeText(formatedData.report);
+    alert('¡Datos copiados al portapapeles!');
   } catch (err) {
     console.error('Error al intentar copiar:', err);
-    buttonCopy.innerText = 'Error al copiar';
+    alert('Error al copiar');
+  } finally {
+    copyButton.disabled = false;
   }
-
-  setTimeout(() => {
-    buttonCopy.innerText = 'Copiar datos al portapapeles';
-    buttonCopy.disabled = false;
-  }, 2000);
 });
 
-function processData(dataList, dateToEval) {
-  const stages = parseStages(dataList);
+function createContratistaItem(item) {
+  const li = document.createElement('li');
+  const firstSpan = document.createElement('span');
+  firstSpan.textContent = item.label;
+  li.appendChild(firstSpan);
 
-  stages.Asignado.content = consolidateTagsAndFilter(stages.Asignado.content);
-  stages.Hecho.content = consolidateTagsAndFilter(stages.Hecho.content);
-  stages['Por facturar'].content = consolidateTagsAndFilter(stages['Por facturar'].content);
+  if (item.value) {
+    const lastSpan = document.createElement('span');
+    lastSpan.textContent = item.value;
+    li.appendChild(lastSpan);
+    if (item.description) li.title = item.description;
+  }
 
-  stages.Hecho.content = filterByLimitDate(stages.Hecho.content, dateToEval);
-  stages['Por facturar'].content = filterByLimitDate(stages['Por facturar'].content, dateToEval);
-
-  delete stages.Nuevo;
-  delete stages.Cancelado;
-
-  const summary = countTeamsTasks(stages.Asignado.content, DEFAULT_SUMMARY);
-
-  renderSummary(stages, summary);
+  return li;
 }
 
-function renderSummary(stages, summary) {
-  const generateTeamLine = (config) => {
-    const data = summary[config.id];
+function showOnDashboard(data) {
+  const { kpi, contratistas } = data.summary;
 
-    if (config.type === 'simple') {
-      return `▪️ *${config.label}*: (${data || 0})`;
-    }
+  Object.keys(kpi).forEach((key) => {
+    if (elements[key]) elements[key].textContent = kpi[key];
+  });
 
-    if (config.type === 'split') {
-      return `▪️ *${config.label}*: (${data?.rf || 0})RF / (${data?.ftth || 0})FTTH`;
-    }
+  elements.activas.innerHTML = '';
+  elements.inactivas.innerHTML = '';
 
-    if (config.id === 'SPECIAL_PE') {
-      const aoc = (summary['Ruben Dario Sanchez Avila'] || summary['Carlos Gabriel Alquedan Pineda']) || 0;
-      const ftth = 0;
-      return `▪️ *PE*: (${aoc})AOC / (${ftth})FTTH`;
-    }
+  const fragmentActivas = document.createDocumentFragment();
+  const fragmentInactivas = document.createDocumentFragment();
 
-    return '';
-  };
+  contratistas.forEach((item) => {
+    const li = createContratistaItem(item);
+    item.value ? fragmentActivas.appendChild(li) : fragmentInactivas.appendChild(li);
+  });
 
-  const teamsHtml = GLOBAL_CONFIG.map(generateTeamLine).join('\n');
-
-  textArea.textContent = `_*STATUS DE LAS ASISTENCIAS*_
-
-▪️ _N° de Asistencias Asignadas:_ *${stages.Asignado.amount}*
-▪️ _N° Tickets de Asistencias en espera:_ *VALIDAR*
-
-${teamsHtml}
-
-▪️ _Asistencias En Progreso:_ *${stages['En Progreso']?.amount || 0}*
-▪️ _Asistencias Por Facturar:_ *${stages['Por facturar']?.amount || 0}*
-▪️ _Clientes atendidos Hoy:_ *${stages['Por facturar'].content.length + stages.Hecho.content.length}*`;
+  elements.activas.appendChild(fragmentActivas);
+  elements.inactivas.appendChild(fragmentInactivas);
 }

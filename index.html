@@ -4,67 +4,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles/reset.css" />
   <link rel="stylesheet" href="./styles/main.css" />
 </head>
 
 <body>
-  <main class="app-container">
-    <div class="title-container card">
-      <h1>Status de Asistencias</h1>
-      <p>Genera el reporte del SAC rapidamente</p>
-    </div>
-    <label id="file-uploader-container" for="file-uploader" class="file-uploader card">
-      <p>Arrastra y suelta el archivo de Asistencias (.xlsx)</p>
-      o
-      <button>Haz click para buscar el archivo</button>
-      <input id="file-uploader" name="_*STATUS DE LAS ASISTENCIAS*_
+  <section class="file-section card">
+    <h3>Subir archivo</h3>
+    <p>Selecciona el archivo de Asistencias</p>
 
-▪️ _N° de Asistencias Asignadas:_ *33*
-▪️ _N° Tickets de Asistencias en espera:_ *VALIDAR*
+    <label for="file-input">
+      <svg fill="inherit" viewBox="0 0 26 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M11.7 19.2842V25.4897C11.7 25.8481 11.8245 26.1484 12.0735 26.3903C12.3223 26.632 12.6311 26.7528 13 26.7528C13.3689 26.7528 13.6777 26.632 13.9265 26.3903C14.1755 26.1484 14.3 25.8481 14.3 25.4897V19.2842L16.5932 21.5124C16.7223 21.6376 16.8674 21.7315 17.0283 21.7941C17.1895 21.8567 17.3507 21.8838 17.5119 21.8754C17.6728 21.8667 17.8321 21.831 17.9898 21.7684C18.1476 21.7058 18.291 21.6119 18.4201 21.4867C18.6712 21.2254 18.8012 20.9295 18.8101 20.5992C18.8188 20.2688 18.6888 19.9729 18.4201 19.7116L14.0968 15.5107C13.9344 15.3533 13.7632 15.2421 13.5833 15.1773C13.4033 15.1124 13.2089 15.08 13 15.08C12.7911 15.08 12.5967 15.1124 12.4167 15.1773C12.2368 15.2421 12.0656 15.3533 11.9032 15.5107L7.57987 19.7116C7.32218 19.9622 7.19507 20.2554 7.19853 20.5912C7.20171 20.9269 7.33778 21.2254 7.60673 21.4867C7.87569 21.7307 8.18018 21.857 8.5202 21.8657C8.85993 21.8741 9.16428 21.7478 9.43323 21.4867L11.7 19.2842ZM3.13343 32C2.25781 32 1.51667 31.7053 0.91 31.1158C0.303333 30.5263 0 29.8062 0 28.9554V3.04463C0 2.19382 0.303333 1.47368 0.91 0.884211C1.51667 0.294737 2.25781 0 3.13343 0H15.6035C16.0212 0 16.4229 0.078877 16.8086 0.236631C17.1939 0.394105 17.5289 0.611088 17.8135 0.88758L25.0865 7.95453C25.3711 8.23102 25.5944 8.55649 25.7565 8.93095C25.9188 9.30568 26 9.696 26 10.1019V28.9554C26 29.8062 25.6967 30.5263 25.09 31.1158C24.4833 31.7053 23.7422 32 22.8666 32H3.13343ZM15.6 8.58274V2.52632H3.13343C2.99997 2.52632 2.87777 2.58035 2.76683 2.68842C2.65561 2.79621 2.6 2.91495 2.6 3.04463V28.9554C2.6 29.0851 2.65561 29.2038 2.76683 29.3116C2.87777 29.4197 2.99997 29.4737 3.13343 29.4737H22.8666C23 29.4737 23.1222 29.4197 23.2332 29.3116C23.3444 29.2038 23.4 29.0851 23.4 28.9554V10.1053H17.1669C16.72 10.1053 16.3472 9.96 16.0485 9.66947C15.7495 9.37923 15.6 9.01698 15.6 8.58274Z" />
+      </svg>
 
-▪️ *JERLIX COLMENARES*: (1)
-▪️ *CG SERVICIOS*: (0)
-▪️ *DAINEE ZAMBRANO*: (0)
-▪️ *GRUPO ARLO*: (0)
-▪️ *INVERSIONES PEÑALVA*: (4)
-▪️ *IVENETI*: (0)RF / (0)FTTH
-▪️ *JERYCO ORTEGA*: (0)
-▪️ *JONAYKER MENDOZA*: (2)
-▪️ *K. SUAREZ*: (2)
-▪️ *KARLANIS TARIFFA*: (0)
-▪️ *KENNY RODRIGUEZ*: (0)RF / (0)FTTH
-▪️ *LATIN TELECOM*: (3)
-▪️ *LFM CONSULTOR*: (2)
-▪️ *MARCIAL RODRIGUEZ*: (3)
-▪️ *MARTIN BOU*: (0)RF / (0)FTTH
-▪️ *MOISES URBINA*: (3)
-▪️ *OSCAR HENRIQUEZ*: (3)
-▪️ *PE*: (0)AOC / (0)FTTH
-▪️ *SMARTLIFE*: (0)RF / (2)FTTH
-▪️ *TERASERVICES VALENCIA*: (0)RF / (2)FTTH
-▪️ *TERASERVICES PUERTO*: (0)RF / (6)FTTH
-▪️ *TERASERVICES ARAGUA*: (0)
-
-▪️ _Asistencias En Progreso:_ *0*
-▪️ _Asistencias Por Facturar:_ *58*
-▪️ _Clientes atendidos Hoy:_ *35*file-uploader" type="file" accept=".xlsx" />
+      Arrastra y suelta el archivo o haz click aquí
+      <span id="file-name">Ningún archivo seleccionado</span>
+      <input type="file" id="file-input">
     </label>
-    <div class="date-selector card">
-      Ingresa la fecha a evaluar
-      <input type="date" id="date-selector" />
-    </div>
-    <section class="button-container card">
-      <span id="file-name">Ningun archivo cargado</span>
-      <div class="start-button-container">
-        <button id="button-start">Procesar archivo</button>
-      </div>
-      <div class="copy-button-container">
-        <button id="button-copy" disabled>Copiar datos al portapapeles</button>
-      </div>
-    </section>
 
-    <textarea class="card" id="text-area" readonly></textarea>
-  </main>
+    <div class="floating-text">
+      .xlsx
+    </div>
+  </section>
+
+  <section class="day-section card">
+    <h3>Seleccionar día</h3>
+    <p>Selecciona el día que deseas evaluar</p>
+
+    <section>
+      <input type="radio" name="day-selected" id="yesterday">
+      <label for="yesterday">
+        <span>Ayer</span>
+        <span id="yesterday-value"></span>
+      </label>
+
+      <input type="radio" name="day-selected" id="today" checked>
+      <label for="today">
+        <span>Hoy</span>
+        <span id="today-value"></span>
+      </label>
+    </section>
+  </section>
+
+  <section class="buttons-section">
+    <button id="start-button">
+      <svg fill="inherit" width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6.75 12.25V14.5C6.75 14.7128 6.82183 14.891 6.9655 15.0345C7.109 15.1782 7.28717 15.25 7.5 15.25C7.71283 15.25 7.891 15.1782 8.0345 15.0345C8.17817 14.891 8.25 14.7128 8.25 14.5V12.25H10.5C10.7128 12.25 10.891 12.1782 11.0345 12.0345C11.1782 11.891 11.25 11.7128 11.25 11.5C11.25 11.2872 11.1782 11.109 11.0345 10.9655C10.891 10.8218 10.7128 10.75 10.5 10.75H8.25V8.5C8.25 8.28717 8.17817 8.109 8.0345 7.9655C7.891 7.82183 7.71283 7.75 7.5 7.75C7.28717 7.75 7.109 7.82183 6.9655 7.9655C6.82183 8.109 6.75 8.28717 6.75 8.5V10.75H4.5C4.28717 10.75 4.109 10.8218 3.9655 10.9655C3.82183 11.109 3.75 11.2872 3.75 11.5C3.75 11.7128 3.82183 11.891 3.9655 12.0345C4.109 12.1782 4.28717 12.25 4.5 12.25H6.75ZM1.80775 19C1.30258 19 0.875 18.825 0.525 18.475C0.175 18.125 0 17.6974 0 17.1923V1.80775C0 1.30258 0.175 0.875 0.525 0.525C0.875 0.175 1.30258 0 1.80775 0H9.002C9.243 0 9.47475 0.0468332 9.69725 0.1405C9.91958 0.234 10.1128 0.362834 10.277 0.527L14.473 4.723C14.6372 4.88717 14.766 5.08042 14.8595 5.30275C14.9532 5.52525 15 5.757 15 5.998V17.1923C15 17.6974 14.825 18.125 14.475 18.475C14.125 18.825 13.6974 19 13.1923 19H1.80775ZM9 5.096V1.5H1.80775C1.73075 1.5 1.66025 1.53208 1.59625 1.59625C1.53208 1.66025 1.5 1.73075 1.5 1.80775V17.1923C1.5 17.2693 1.53208 17.3398 1.59625 17.4038C1.66025 17.4679 1.73075 17.5 1.80775 17.5H13.1923C13.2693 17.5 13.3398 17.4679 13.4038 17.4038C13.4679 17.3398 13.5 17.2693 13.5 17.1923V6H9.904C9.64617 6 9.43108 5.91375 9.25875 5.74125C9.08625 5.56892 9 5.35383 9 5.096Z" />
+      </svg>
+
+      Generar
+    </button>
+    <button id="copy-button" disabled>
+      <svg fill="inherit" width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M14.6502 15.381H5.25464C4.79758 15.381 4.41072 15.2226 4.09405 14.906C3.77739 14.5893 3.61905 14.2024 3.61905 13.7454V1.63559C3.61905 1.17853 3.77739 0.791668 4.09405 0.475001C4.41072 0.158334 4.79758 0 5.25464 0H10.859C11.077 0 11.2867 0.042373 11.488 0.127119C11.6892 0.211715 11.864 0.328279 12.0125 0.476811L15.8089 4.2732C15.9575 4.42173 16.074 4.59657 16.1586 4.79773C16.2434 4.99904 16.2857 5.20872 16.2857 5.42677V13.7454C16.2857 14.2024 16.1274 14.5893 15.8107 14.906C15.4941 15.2226 15.1072 15.381 14.6502 15.381ZM14.9286 5.42858H11.9533C11.646 5.42858 11.3864 5.32272 11.1747 5.11101C10.963 4.89929 10.8572 4.63978 10.8572 4.33246V1.35715H5.25464C5.18497 1.35715 5.12119 1.38617 5.06328 1.44423C5.00523 1.50213 4.9762 1.56592 4.9762 1.63559V13.7454C4.9762 13.8151 5.00523 13.8788 5.06328 13.9367C5.12119 13.9948 5.18497 14.0238 5.25464 14.0238H14.6502C14.7198 14.0238 14.7836 13.9948 14.8415 13.9367C14.8996 13.8788 14.9286 13.8151 14.9286 13.7454V5.42858ZM1.63559 19C1.17853 19 0.791668 18.8417 0.475001 18.525C0.158334 18.2084 0 17.8215 0 17.3644V6.10715C0 5.91459 0.0649922 5.75339 0.194977 5.62356C0.32481 5.49357 0.486009 5.42858 0.678573 5.42858C0.871136 5.42858 1.03234 5.49357 1.16217 5.62356C1.29215 5.75339 1.35715 5.91459 1.35715 6.10715V17.3644C1.35715 17.4341 1.38617 17.4979 1.44423 17.5558C1.50213 17.6139 1.56592 17.6429 1.63559 17.6429H10.1786C10.3712 17.6429 10.5324 17.7079 10.6622 17.8379C10.7922 17.9677 10.8572 18.1289 10.8572 18.3215C10.8572 18.514 10.7922 18.6752 10.6622 18.8051C10.5324 18.935 10.3712 19 10.1786 19H1.63559Z" />
+      </svg>
+
+      Copiar
+    </button>
+  </section>
+
+  <section class="overview-section card">
+    <h3>Overview de Asistencias Técnicas</h3>
+    <p>Acá se muestran los valores luego de analizar el Archivo</p>
+
+    <section>
+      <section class="kpi-section">
+        <div>Tareas Asignadas <span id="asignadas">0</span></div>
+        <div>Tickets en Espera <span>Manual</span></div>
+        <div>Tareas en Progreso <span id="progreso">0</span></div>
+        <div>Tareas por Facturar <span id="facturar">0</span></div>
+        <div>Clientes Atendidos <span id="atendidos">0</span></div>
+      </section>
+
+      <section class="actives-section">
+        Contratistas activas:
+        <ul id="activas">
+          Acá se mostrarán las cuadrillas con actividades asignadas
+        </ul>
+      </section>
+
+      <section class="inactives-section">
+        Contratistas inactivas
+        <ul id="inactivas">
+          Acá se mostrarán las cuadrillas sin actividades asignadas
+        </ul>
+      </section>
+    </section>
+  </section>
+
   <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
   <script src="main.js" type="module"></script>
 </body>

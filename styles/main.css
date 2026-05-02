@@ -1,153 +1,297 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  --1: #efefef;
-  --2: #1f1f1f;
-  --3: #1f1f1f1a;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --1: #1f1f1f;
-    --2: #efefef;
-    --3: #f0f0f00d;
-  }
-}
+  --body: #f8fafc;
+  --card: #ffffff;
+  --primary: #3b82f6;
+  --secondary: #e2e8f0;
+  --text: #1f1f1f;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  --sm-spacing: 0.5rem;
+  --md-spacing: 1rem;
+  --lg-spacing: 2rem;
+
+  --sm-text: 0.75rem;
+  --md-text: 1rem;
+  --lg-text: 1.25rem;
+}
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --1: #27272a;
+    --2: #ffffff;
+    --3: #2094f380;
+  }
+} */
+
+body {
+  height: 100dvh;
+  background-color: var(--body);
+  padding: var(--lg-spacing);
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr 1fr min-content;
+  grid-template-areas:
+    'file-section overview-section'
+    'day-section overview-section'
+    'buttons-section overview-section';
+  gap: var(--lg-spacing);
 
   font-family: 'Inter', sans-serif;
-  color: var(--2);
-}
-body {
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  place-items: center;
+  color: var(--text);
 
-  background-color: var(--1);
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-.app-container {
-  width: auto;
-  height: 90%;
-  max-width: 1280px;
-  max-height: 612px;
-
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(auto);
-  grid-template-areas:
-    'title textarea'
-    'file textarea'
-    'date textarea'
-    'button textarea';
-}
-.title-container {
-  grid-area: title;
-}
-.file-uploader {
-  grid-area: file;
-}
-.date-selector {
-  grid-area: date;
-}
-.button-container {
-  grid-area: button;
-}
-textarea {
-  grid-area: textarea;
+  transition: opacity 0.3s ease-in;
 }
 
 .card {
-  width: 100%;
-  padding: 1rem;
+  height: 100%;
+  padding: var(--lg-spacing);
+  position: relative;
 
   display: flex;
   flex-direction: column;
+
+  background-color: var(--card);
+  border: 2px solid var(--secondary);
+  border-radius: var(--md-spacing);
+}
+.card h3 {
+  margin-bottom: var(--sm-spacing);
+
+  font-size: var(--lg-text);
+  font-weight: 600;
+}
+.card p {
+  margin-bottom: var(--lg-spacing);
+}
+
+.file-section {
+  grid-area: file-section;
+}
+.file-section label {
+  height: 100%;
+  padding: var(--lg-spacing);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 500;
+
+  background-color: var(--body);
+  border: 2px dashed var(--secondary);
+  border-radius: var(--md-spacing);
+
+  transition: all 0.3s ease-in-out;
+}
+.file-section label svg {
+  width: 1.5rem;
+  margin-bottom: var(--lg-spacing);
+
+  display: none;
+}
+.file-section label:hover {
+  border-style: solid;
+  border-color: var(--primary);
+  color: var(--primary);
+  fill: var(--primary);
+  cursor: pointer;
+}
+.file-section span {
+  margin-top: var(--sm-spacing);
+  font-size: var(--sm-text);
+  opacity: 0.25;
+}
+.file-section div {
+  padding: var(--sm-spacing) var(--md-spacing);
+
+  position: absolute;
+  right: var(--lg-spacing);
+  top: var(--lg-spacing);
+
+  font-weight: 500;
+
+  background-color: var(--body);
+  border-radius: var(--md-spacing);
+}
+
+.day-section {
+  grid-area: day-section;
+  width: 100%;
+}
+.day-section section {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  gap: var(--md-spacing);
+}
+.day-section section label {
+  width: 100%;
+  height: 100%;
+  padding: var(--md-spacing);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--md-spacing);
+
+  font-weight: 400;
+  color: var(--text);
+
+  border: 2px solid var(--secondary);
+  border-radius: var(--md-spacing);
+  cursor: pointer;
+
+  transition: all 0.3s ease-in-out;
+}
+.day-section section label span:nth-child(2) {
+  font-size: var(--lg-text);
+  font-weight: 600;
+}
+.day-section section input[type='radio']:checked + label {
+  color: var(--card);
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.buttons-section {
+  grid-area: buttons-section;
+  width: 100%;
+
+  display: flex;
+  gap: var(--md-spacing);
+}
+.buttons-section button {
+  width: 100%;
+  height: fit-content;
+  padding: var(--md-spacing);
+
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: var(--md-spacing);
 
-  border: 2px solid var(--3);
-  border-radius: 1rem;
-}
-.file-uploader {
+  background-color: var(--primary);
+  color: var(--card);
+  fill: var(--card);
+
+  font-weight: 600;
+  border-radius: var(--md-spacing);
   cursor: pointer;
+
+  transition: all 0.3s ease-in-out;
 }
-.file-uploader input {
-  display: none;
+.buttons-section button:nth-child(2) {
+  color: var(--text);
+  fill: var(--text);
+  background-color: var(--secondary);
 }
-.file-uploader > * {
-  text-wrap: pretty;
+.buttons-section button svg {
+  height: 100%;
+}
+.buttons-section button:hover {
+  transform: translateY(-2px);
+}
+.buttons-section button:disabled {
   pointer-events: none;
+  opacity: 0.5;
 }
-.file-uploader button,
-.date-selector input,
-button {
+
+.overview-section {
+  grid-area: overview-section;
   width: 100%;
-  padding: 0.6rem;
-
-  font-size: 1rem;
-  font-weight: 500;
-  text-align: center;
-
-  outline: none;
-  cursor: pointer;
-  border: none;
-
-  color: var(--1);
-  background-color: var(--2);
-  border-radius: 0.6rem;
-
-  transition: opacity 0.1s ease-in;
+  height: 100%;
 }
-button:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-}
-.date-selector input[type='date']::-webkit-calendar-picker-indicator {
-  display: none;
-  -webkit-appearance: none;
-}
-.date-selector input[type='date']::-webkit-datetime-edit-fields-wrapper,
-input[type='date']::-webkit-datetime-edit-text,
-input[type='date']::-webkit-datetime-edit-month-field,
-input[type='date']::-webkit-datetime-edit-day-field,
-input[type='date']::-webkit-datetime-edit-year-field {
-  background: none !important;
-  color: inherit !important;
-  pointer-events: none;
-}
-.button-container span {
-  font-size: 0.8rem;
-  opacity: 0.6;
-}
-.start-button-container,
-.copy-button-container,
-.start-button-container button,
-.copy-button-container button {
+.overview-section > section {
+  height: 100%;
   width: 100%;
-}
-.copy-button-container button {
-  color: var(--2);
-  background-color: transparent;
-  border: 2px solid var(--2);
-}
-textarea {
-  min-width: fit-content;
-  min-height: fit-content;
-  font-size: .9rem;
-  font-weight: 500;
 
+  display: flex;
+  flex-direction: column;
+  gap: var(--lg-spacing);
+}
+.overview-section .kpi-section {
+  display: flex;
+  gap: var(--md-spacing);
+}
+.overview-section .kpi-section div {
+  width: 100%;
+  height: fit-content;
+  padding: var(--md-spacing);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-spacing);
+  font-weight: 400;
+
+  background-color: var(--body);
+  border-radius: var(--md-spacing);
+}
+.overview-section .kpi-section div span {
+  font-size: 20px;
+  font-weight: 600;
+}
+.overview-section .actives-section,
+.overview-section .inactives-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-spacing);
+}
+.overview-section .actives-section ul,
+.overview-section .inactives-section ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sm-spacing);
+}
+.overview-section .actives-section ul li,
+.overview-section .inactives-section ul li {
+  display: flex;
+
+  font-size: var(--sm-text);
+  font-weight: 400;
+
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: var(--sm-spacing);
   overflow: hidden;
-  field-sizing: content;
-  resize: none;
-  outline: none;
+  pointer-events: none;
+}
+.overview-section .actives-section ul li[title] {
+  cursor: zoom-in;
+  pointer-events: all;
+}
+.overview-section .actives-section ul li span {
+  padding: var(--sm-spacing);
+  background-color: var(--card);
+}
+.overview-section .actives-section ul li span:nth-child(2) {
+  display: grid;
+  place-items: center;
+
+  font-weight: 600;
+  color: var(--card);
 
   background-color: transparent;
+}
+.overview-section .inactives-section {
+  height: 100%;
+  justify-content: flex-end;
+}
+.overview-section .inactives-section ul li {
+  padding: var(--sm-spacing);
+  background-color: transparent;
+  border-color: var(--secondary);
+}
+
+@media (min-height: 765px) {
+  body {
+    grid-template-rows: 1.25fr 1fr auto;
+  }
+  .file-section label svg {
+    display: inline;
+  }
 }
