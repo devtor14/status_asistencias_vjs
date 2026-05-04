@@ -9,13 +9,13 @@ const startButton = document.querySelector('#start-button');
 const copyButton = document.querySelector('#copy-button');
 
 const elements = {
+  fileName: document.querySelector('#file-name'),
   asignadas: document.querySelector('#asignadas'),
   progreso: document.querySelector('#progreso'),
   facturar: document.querySelector('#facturar'),
   atendidos: document.querySelector('#atendidos'),
-  activas: document.querySelector('#activas'),
-  inactivas: document.querySelector('#inactivas'),
-  fileName: document.querySelector('#file-name'),
+  teams: document.querySelector('#teams-list'),
+  modal: document.querySelector('#modal'),
 };
 
 let formatedData = '';
@@ -25,7 +25,12 @@ window.addEventListener('load', () => {
   const yesterday = new Date();
   yesterday.setDate(today.getDate() - 1);
 
-  const formatISO = (date) => date.toISOString().split('T')[0];
+  const formatISO = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
   const formatDay = (date) => String(date.getDate()).padStart(2, '0');
 
   todayInput.value = formatISO(today);
@@ -65,32 +70,36 @@ startButton.addEventListener('click', () => {
 });
 
 copyButton.addEventListener('click', async () => {
-  if (!formatedData?.report) return;
+  if (!formatedData?.report || modal.className == 'show') return;
 
   copyButton.disabled = true;
+  modal.className = 'show';
   try {
     await navigator.clipboard.writeText(formatedData.report);
-    alert('¡Datos copiados al portapapeles!');
   } catch (err) {
     console.error('Error al intentar copiar:', err);
-    alert('Error al copiar');
-  } finally {
-    copyButton.disabled = false;
   }
+
+  setTimeout(() => {
+    modal.className = '';
+    copyButton.disabled = false;
+  }, 4000);
 });
 
 function createContratistaItem(item) {
   const li = document.createElement('li');
   const firstSpan = document.createElement('span');
-  firstSpan.textContent = item.label;
-  li.appendChild(firstSpan);
+  const div = document.createElement('div');
 
-  if (item.value) {
-    const lastSpan = document.createElement('span');
-    lastSpan.textContent = item.value;
-    li.appendChild(lastSpan);
-    if (item.description) li.title = item.description;
-  }
+  firstSpan.textContent = item.label;
+  div.textContent = item.value;
+  li.appendChild(firstSpan);
+  li.appendChild(div);
+
+  if (item.value && item.description) li.title = item.description;
+  if (item.value > 0) li.className = 'low-value';
+  if (item.value > 4) li.className = 'mid-value';
+  if (item.value > 7) li.className = 'high-value';
 
   return li;
 }
@@ -98,21 +107,20 @@ function createContratistaItem(item) {
 function showOnDashboard(data) {
   const { kpi, contratistas } = data.summary;
 
+  contratistas.sort((a, b) => b.value - a.value);
+
   Object.keys(kpi).forEach((key) => {
     if (elements[key]) elements[key].textContent = kpi[key];
   });
 
-  elements.activas.innerHTML = '';
-  elements.inactivas.innerHTML = '';
+  elements.teams.innerHTML = '';
 
-  const fragmentActivas = document.createDocumentFragment();
-  const fragmentInactivas = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
 
   contratistas.forEach((item) => {
     const li = createContratistaItem(item);
-    item.value ? fragmentActivas.appendChild(li) : fragmentInactivas.appendChild(li);
+    fragment.appendChild(li);
   });
 
-  elements.activas.appendChild(fragmentActivas);
-  elements.inactivas.appendChild(fragmentInactivas);
+  elements.teams.appendChild(fragment);
 }

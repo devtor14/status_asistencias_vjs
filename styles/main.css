@@ -7,13 +7,18 @@
   --secondary: #e2e8f0;
   --text: #1f1f1f;
 
+  --gray: rgb(170, 178, 191, 0.16);
+  --green: rgba(34, 197, 94, 0.46);
+  --yellow: rgba(234, 179, 8, 0.46);
+  --red: rgba(239, 68, 68, 0.46);
+
   --sm-spacing: 0.5rem;
   --md-spacing: 1rem;
   --lg-spacing: 2rem;
 
   --sm-text: 0.75rem;
   --md-text: 1rem;
-  --lg-text: 1.25rem;
+  --lg-text: 1.5rem;
 }
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -29,12 +34,11 @@ body {
   padding: var(--lg-spacing);
 
   display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: 1fr 1fr min-content;
+  grid-template-columns: 0.6fr 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas:
     'file-section overview-section'
-    'day-section overview-section'
-    'buttons-section overview-section';
+    'day-section overview-section';
   gap: var(--lg-spacing);
 
   font-family: 'Inter', sans-serif;
@@ -56,18 +60,22 @@ body {
   border: 2px solid var(--secondary);
   border-radius: var(--md-spacing);
 }
-.card h3 {
+.card > h3 {
   margin-bottom: var(--sm-spacing);
 
   font-size: var(--lg-text);
   font-weight: 600;
 }
-.card p {
+.card > p {
+  opacity: 0.8;
   margin-bottom: var(--lg-spacing);
 }
 
 .file-section {
   grid-area: file-section;
+  height: fit-content;
+
+  transition: all 0.3s ease-in-out;
 }
 .file-section label {
   height: 100%;
@@ -80,17 +88,24 @@ body {
 
   font-weight: 500;
 
-  background-color: var(--body);
   border: 2px dashed var(--secondary);
   border-radius: var(--md-spacing);
-
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in;
 }
-.file-section label svg {
-  width: 1.5rem;
+.file-section label figure {
+  width: 3rem;
+  height: 3rem;
   margin-bottom: var(--lg-spacing);
 
-  display: none;
+  display: grid;
+  place-items: center;
+
+  background-color: var(--primary);
+  border-radius: 10rem;
+}
+.file-section label figure svg {
+  width: 1.2rem;
+  fill: var(--card);
 }
 .file-section label:hover {
   border-style: solid;
@@ -99,10 +114,14 @@ body {
   fill: var(--primary);
   cursor: pointer;
 }
-.file-section span {
-  margin-top: var(--sm-spacing);
+.file-section label p span {
+  color: var(--primary);
+}
+.file-section label > span {
+  margin-top: var(--md-spacing);
   font-size: var(--sm-text);
-  opacity: 0.25;
+
+  opacity: 0.5;
 }
 .file-section div {
   padding: var(--sm-spacing) var(--md-spacing);
@@ -113,7 +132,7 @@ body {
 
   font-weight: 500;
 
-  background-color: var(--body);
+  background-color: var(--gray);
   border-radius: var(--md-spacing);
 }
 
@@ -142,31 +161,46 @@ body {
   font-weight: 400;
   color: var(--text);
 
-  border: 2px solid var(--secondary);
+  background-color: var(--gray);
   border-radius: var(--md-spacing);
   cursor: pointer;
 
   transition: all 0.3s ease-in-out;
 }
 .day-section section label span:nth-child(2) {
-  font-size: var(--lg-text);
   font-weight: 600;
 }
 .day-section section input[type='radio']:checked + label {
   color: var(--card);
   background-color: var(--primary);
-  border-color: var(--primary);
 }
 
-.buttons-section {
-  grid-area: buttons-section;
+.overview-section {
+  grid-area: overview-section;
+
   width: 100%;
+  height: 100%;
+}
+.overview-section header {
+  width: 100%;
+  margin-bottom: var(--lg-spacing);
 
   display: flex;
   gap: var(--md-spacing);
 }
-.buttons-section button {
+.overview-section header section {
   width: 100%;
+}
+.overview-section header section > h3 {
+  margin-bottom: var(--sm-spacing);
+
+  font-size: var(--lg-text);
+  font-weight: 600;
+}
+.overview-section header section > p {
+  opacity: 0.8;
+}
+.overview-section button {
   height: fit-content;
   padding: var(--md-spacing);
 
@@ -185,34 +219,31 @@ body {
 
   transition: all 0.3s ease-in-out;
 }
-.buttons-section button:nth-child(2) {
+.overview-section button:nth-child(3) {
   color: var(--text);
   fill: var(--text);
-  background-color: var(--secondary);
+  background-color: var(--gray);
 }
-.buttons-section button svg {
+.overview-section button svg {
   height: 100%;
 }
-.buttons-section button:hover {
+.overview-section button:hover {
   transform: translateY(-2px);
 }
-.buttons-section button:disabled {
+.overview-section button:disabled {
   pointer-events: none;
   opacity: 0.5;
 }
 
-.overview-section {
-  grid-area: overview-section;
-  width: 100%;
-  height: 100%;
-}
-.overview-section > section {
+.overview-section > main {
   height: 100%;
   width: 100%;
 
   display: flex;
   flex-direction: column;
   gap: var(--lg-spacing);
+
+  overflow: hidden;
 }
 .overview-section .kpi-section {
   display: flex;
@@ -228,70 +259,89 @@ body {
   gap: var(--md-spacing);
   font-weight: 400;
 
-  background-color: var(--body);
+  background-color: var(--gray);
   border-radius: var(--md-spacing);
 }
 .overview-section .kpi-section div span {
   font-size: 20px;
   font-weight: 600;
 }
-.overview-section .actives-section,
-.overview-section .inactives-section {
+.overview-section .teams-section {
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   gap: var(--md-spacing);
 }
-.overview-section .actives-section ul,
-.overview-section .inactives-section ul {
+.overview-section .teams-section ul {
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: var(--sm-spacing);
+
+  overflow-y: auto;
 }
-.overview-section .actives-section ul li,
-.overview-section .inactives-section ul li {
-  display: flex;
+.overview-section .teams-section ul li {
+  padding: var(--sm-spacing) var(--md-spacing);
+
+  display: grid;
+  grid-template-columns: auto auto;
+  place-items: center;
+  gap: var(--md-spacing);
 
   font-size: var(--sm-text);
   font-weight: 400;
 
-  background-color: var(--primary);
-  border: 2px solid var(--primary);
-  border-radius: var(--sm-spacing);
+  background-color: var(--gray);
+  border-radius: var(--md-spacing);
   overflow: hidden;
   pointer-events: none;
 }
-.overview-section .actives-section ul li[title] {
+.overview-section .teams-section ul li[title] {
   cursor: zoom-in;
   pointer-events: all;
 }
-.overview-section .actives-section ul li span {
+.overview-section .teams-section ul li div {
   padding: var(--sm-spacing);
-  background-color: var(--card);
-}
-.overview-section .actives-section ul li span:nth-child(2) {
+
   display: grid;
   place-items: center;
 
   font-weight: 600;
-  color: var(--card);
 
-  background-color: transparent;
+  background-color: inherit;
+  border-radius: var(--sm-spacing);
 }
-.overview-section .inactives-section {
-  height: 100%;
-  justify-content: flex-end;
+.overview-section .teams-section ul .low-value {
+  background-color: var(--green);
 }
-.overview-section .inactives-section ul li {
-  padding: var(--sm-spacing);
-  background-color: transparent;
-  border-color: var(--secondary);
+.overview-section .teams-section ul .mid-value {
+  background-color: var(--yellow);
+}
+.overview-section .teams-section ul .high-value {
+  background-color: var(--red);
 }
 
-@media (min-height: 765px) {
-  body {
-    grid-template-rows: 1.25fr 1fr auto;
-  }
-  .file-section label svg {
-    display: inline;
-  }
+#modal {
+  width: 400px;
+  padding: var(--lg-spacing);
+
+  position: fixed;
+  top: var(--md-spacing);
+  left: var(--md-spacing);
+
+  font-size: var(--md-text);
+  font-weight: 600;
+  text-wrap: pretty;
+
+  background-color: var(--body);
+  border: 2px solid var(--secondary);
+  border-radius: var(--md-spacing);
+
+  transform: translateX(-200%);
+  transition: all 0.5s ease-in-out;
+}
+
+#modal.show {
+  transform: translateX(0);
 }

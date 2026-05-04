@@ -1,5 +1,5 @@
 const filterByLimitDate = (dataList, dateToEval) => {
-  const today = new Date(dateToEval + "T00:00:00");
+  const today = new Date(dateToEval + 'T00:00:00');
   today.setHours(0, 0, 0, 0);
 
   return dataList.filter((element) => {
@@ -8,11 +8,7 @@ const filterByLimitDate = (dataList, dateToEval) => {
 
     if (!(limitDate instanceof Date)) return false;
 
-    return (
-      limitDate.getUTCDate() === today.getUTCDate() &&
-      limitDate.getUTCMonth() === today.getUTCMonth() &&
-      limitDate.getUTCFullYear() === today.getUTCFullYear()
-    );
+    return limitDate.getUTCDate() === today.getUTCDate() && limitDate.getUTCMonth() === today.getUTCMonth() && limitDate.getUTCFullYear() === today.getUTCFullYear();
   });
 };
 

@@ -1,10 +1,10 @@
 export const GLOBAL_CONFIG = [
-  { id: 'Emprendimiento Jerlix Colmenares', label: 'JERLIX COLMENARES', type: 'simple' },
   { id: 'CG SERVICIOS', label: 'CG SERVICIOS', type: 'simple' },
   { id: 'Dainee Yanibeth Zambrano Torres', label: 'DAINEE ZAMBRANO', type: 'simple' },
   { id: 'GRUPO ARLO SYSTEM', label: 'GRUPO ARLO', type: 'simple' },
   { id: 'INVERSIONES PENALVA 2022', label: 'INVERSIONES PEÑALVA', type: 'simple' },
   { id: 'IVENETI', label: 'IVENETI', type: 'split' },
+  { id: 'Emprendimiento Jerlix Colmenares', label: 'JERLIX COLMENARES', type: 'simple' },
   { id: 'Jeryco Salvador Ortega Palacios', label: 'JERYCO ORTEGA', type: 'simple' },
   { id: 'Jonayker Daniel Mendoza Pérez', label: 'JONAYKER MENDOZA', type: 'simple' },
   { id: 'TELECOMUNICACIONES K. SUAREZ', label: 'K. SUAREZ', type: 'simple' },
@@ -16,11 +16,11 @@ export const GLOBAL_CONFIG = [
   { id: 'Martin Bou Mansour Bakhos', label: 'MARTIN BOU', type: 'split' },
   { id: 'Moisés Enmanuel Urbina Villarreal', label: 'MOISES URBINA', type: 'simple' },
   { id: 'Óscar Eduardo Henriquez Zambrano', label: 'OSCAR HENRIQUEZ', type: 'simple' },
-  { id: 'SPECIAL_PE', label: 'PE', type: 'custom' }, 
+  { id: 'SPECIAL_PE', label: 'PE', type: 'custom' },
   { id: 'SMARTLIFE', label: 'SMARTLIFE', type: 'split' },
   { id: 'Jorge Luis Rodríguez Parra', label: 'TERASERVICES VALENCIA', type: 'split' },
   { id: 'Socrates Antonio Sequera Sanchez', label: 'TERASERVICES PUERTO', type: 'split' },
-  { id: 'TRS 2048', label: 'TERASERVICES ARAGUA', type: 'simple' }
+  { id: 'TRS 2048', label: 'TERASERVICES ARAGUA', type: 'simple' },
 ];
 
 export const DEFAULT_SUMMARY = () => ({
