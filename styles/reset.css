@@ -16,7 +16,7 @@ ol {
 }
 
 body {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-family:
