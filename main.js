@@ -6,7 +6,9 @@ const yesterdayValue = document.querySelector('#yesterday-value');
 const todayInput = document.querySelector('#today');
 const todayValue = document.querySelector('#today-value');
 const startButton = document.querySelector('#start-button');
+const modalButton = document.querySelector('#modal-button');
 const copyButton = document.querySelector('#copy-button');
+const closeButton = document.querySelector('#close-button');
 
 const elements = {
   fileName: document.querySelector('#file-name'),
@@ -38,7 +40,7 @@ window.addEventListener('load', () => {
   todayValue.textContent = formatDay(today);
   yesterdayValue.textContent = formatDay(yesterday);
 
-  document.body.style.opacity = '1';
+  document.querySelector('#APP').style.opacity = '1';
 });
 
 excelInput.addEventListener('change', (e) => {
@@ -63,27 +65,30 @@ startButton.addEventListener('click', () => {
     formatedData = formatSummary(stages, sumary);
 
     showOnDashboard(formatedData);
-    copyButton.disabled = false;
+    modalButton.disabled = false;
   };
 
   reader.readAsArrayBuffer(archivo);
 });
 
-copyButton.addEventListener('click', async () => {
+modalButton.addEventListener('click', () => {
   if (!formatedData?.report || modal.className == 'show') return;
+  elements.modal.className = 'show';
+  modalButton.disabled = true;
+});
 
-  copyButton.disabled = true;
-  modal.className = 'show';
+copyButton.addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(formatedData.report);
+    alert('Datos copiados al portapapeles');
   } catch (err) {
     console.error('Error al intentar copiar:', err);
   }
+});
 
-  setTimeout(() => {
-    modal.className = '';
-    copyButton.disabled = false;
-  }, 4000);
+closeButton.addEventListener('click', () => {
+  elements.modal.className = '';
+  modalButton.disabled = false;
 });
 
 function createContratistaItem(item) {

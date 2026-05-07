@@ -29,11 +29,17 @@
 } */
 
 body {
+  width: 100vw;
   height: 100dvh;
+
+  display: grid;
+  place-items: center;
+}
+body > main {
+  width: 100%;
+  height: 100%;
   max-width: 1366px;
   max-height: 768px;
-
-  background-color: var(--body);
   padding: var(--lg-spacing);
   position: fixed;
   top: 50%;
@@ -51,6 +57,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: var(--md-text);
   color: var(--text);
+  background-color: var(--body);
 
   opacity: 0;
   transition: opacity 0.3s ease-in;
@@ -68,7 +75,7 @@ body {
   border: 2px solid var(--secondary);
   border-radius: var(--md-spacing);
 }
-.card > h3 {
+.card h3 {
   margin-bottom: var(--sm-spacing);
 
   font-size: var(--lg-text);
@@ -77,6 +84,35 @@ body {
 .card > p {
   opacity: 0.8;
   margin-bottom: var(--lg-spacing);
+}
+button {
+  height: fit-content;
+  padding: var(--md-spacing);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--primary);
+  color: var(--card);
+  fill: var(--card);
+
+  font-weight: 600;
+  border-radius: var(--md-spacing);
+  cursor: pointer;
+
+  transition: all 0.3s ease-in-out;
+}
+button svg {
+  width: var(--lg-text);
+  height: var(--lg-text);
+}
+button:hover {
+  transform: translateY(-2px);
+}
+button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .file-section {
@@ -154,12 +190,14 @@ body {
   height: 100%;
 
   display: flex;
+  justify-content: center;
+  align-items: center;
+
   gap: var(--md-spacing);
 }
 .day-section section label {
   width: 100%;
   height: 100%;
-  padding: var(--md-spacing);
 
   display: flex;
   flex-direction: column;
@@ -186,13 +224,13 @@ body {
 
 .overview-section {
   grid-area: overview-section;
-
   width: 100%;
   height: 100%;
+
+  gap: var(--lg-spacing);
 }
 .overview-section header {
   width: 100%;
-  margin-bottom: var(--lg-spacing);
 
   display: flex;
   gap: var(--md-spacing);
@@ -209,51 +247,15 @@ body {
 .overview-section header section > p {
   opacity: 0.8;
 }
-.overview-section button {
-  height: fit-content;
-  padding: var(--md-spacing);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--md-spacing);
-
-  background-color: var(--primary);
-  color: var(--card);
-  fill: var(--card);
-
-  font-weight: 600;
-  border-radius: var(--md-spacing);
-  cursor: pointer;
-
-  transition: all 0.3s ease-in-out;
+.overview-section button:nth-child(2) {
+  height: 100%;
 }
 .overview-section button:nth-child(3) {
   color: var(--text);
   fill: var(--text);
   background-color: var(--gray);
 }
-.overview-section button svg {
-  height: 100%;
-}
-.overview-section button:hover {
-  transform: translateY(-2px);
-}
-.overview-section button:disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
 
-.overview-section > main {
-  height: 100%;
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  gap: var(--lg-spacing);
-
-  overflow: hidden;
-}
 .overview-section .kpi-section {
   display: flex;
   gap: var(--md-spacing);
@@ -281,6 +283,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--md-spacing);
+
+  overflow: hidden;
 }
 .overview-section .teams-section ul {
   height: 100%;
@@ -332,25 +336,81 @@ body {
 }
 
 #modal {
-  width: 400px;
+  width: 100vw;
+  height: 100dvh;
   padding: var(--lg-spacing);
 
   position: fixed;
-  top: var(--md-spacing);
-  left: var(--md-spacing);
+  top: 0;
+  left: 0;
+  z-index: 2;
 
-  font-size: var(--md-text);
-  font-weight: 600;
-  text-wrap: pretty;
+  display: grid;
+  place-items: center;
+
+  backdrop-filter: blur(16px);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+#modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+#modal main {
+  width: fit-content;
+  height: 100%;
+
+  gap: var(--lg-spacing);
+}
+#modal main div {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+}
+#modal main div > section {
+  margin-right: var(--lg-spacing);
+}
+#modal main div button {
+  width: fit-content;
+  height: fit-content;
+
+  padding: var(--sm-text);
+  border-radius: var(--sm-text);
+}
+#modal main div button {
+  width: fit-content;
+  height: fit-content;
+
+  padding: var(--sm-text);
+  border-radius: var(--sm-text);
+}
+#modal main div button svg {
+  width: var(--md-text);
+  height: var(--md-text);
+}
+#modal main div button:nth-child(2) {
+  margin-right: var(--sm-spacing);
+}
+#modal main div button:nth-child(3) {
+  background-color: rgba(239, 68, 68);
+}
+#modal main > section {
+  width: 100%;
+  height: 100%;
 
   background-color: var(--body);
-  border: 2px solid var(--secondary);
   border-radius: var(--md-spacing);
-
-  transform: translateX(-200%);
-  transition: all 0.5s ease-in-out;
+  overflow: hidden;
 }
+#modal main > section textarea {
+  width: 100%;
+  height: 100%;
+  padding: var(--md-spacing);
 
-#modal.show {
-  transform: translateX(0);
+  line-height: 1.25;
+  display: inline;
+  resize: none;
+
+  background-color: transparent;
 }
