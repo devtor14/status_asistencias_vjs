@@ -7,6 +7,7 @@ const todayInput = document.querySelector('#today');
 const todayValue = document.querySelector('#today-value');
 const startButton = document.querySelector('#start-button');
 const modalButton = document.querySelector('#modal-button');
+const textArea = document.querySelector('#text-area');
 const copyButton = document.querySelector('#copy-button');
 const closeButton = document.querySelector('#close-button');
 
@@ -66,6 +67,7 @@ startButton.addEventListener('click', () => {
 
     showOnDashboard(formatedData);
     modalButton.disabled = false;
+    textArea.textContent = formatedData.report
   };
 
   reader.readAsArrayBuffer(archivo);
