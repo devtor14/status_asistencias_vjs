@@ -25,10 +25,6 @@ const elements = {
 let formatedData = '';
 
 window.addEventListener('load', () => {
-  if (document.cookie) {
-    document.body.className = document.cookie;
-  }
-
   const today = new Date();
   const yesterday = new Date();
   yesterday.setDate(today.getDate() - 1);
@@ -50,8 +46,8 @@ window.addEventListener('load', () => {
 });
 
 themeShifter.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  document.cookie != '-' ? (document.cookie = '-') : (document.cookie = 'dark');
+  document.documentElement.classList.toggle('dark');
+  document.cookie != 'light' ? (document.cookie = 'light') : (document.cookie = 'dark');
 });
 
 excelInput.addEventListener('change', (e) => {

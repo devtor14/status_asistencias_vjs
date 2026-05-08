@@ -20,7 +20,7 @@
   --md-text: 1rem;
   --lg-text: 1.5rem;
 }
-body.dark {
+html.dark {
   --body: #0f172a;
   --card: #1e293b;
   --secondary: #334155;
@@ -48,12 +48,12 @@ body #theme-shifter:hover {
   cursor: pointer;
 }
 body #dark,
-body.dark #light {
+html.dark #light {
   opacity: 0;
   visibility: hidden;
   position: absolute;
 }
-body.dark #dark {
+html.dark #dark {
   opacity: 1;
   visibility: visible;
   position: relative;
