@@ -10,6 +10,7 @@ const modalButton = document.querySelector('#modal-button');
 const textArea = document.querySelector('#text-area');
 const copyButton = document.querySelector('#copy-button');
 const closeButton = document.querySelector('#close-button');
+const themeShifter = document.querySelector('#theme-shifter');
 
 const elements = {
   fileName: document.querySelector('#file-name'),
@@ -24,6 +25,10 @@ const elements = {
 let formatedData = '';
 
 window.addEventListener('load', () => {
+  if (document.cookie) {
+    document.body.className = document.cookie;
+  }
+
   const today = new Date();
   const yesterday = new Date();
   yesterday.setDate(today.getDate() - 1);
@@ -42,6 +47,11 @@ window.addEventListener('load', () => {
   yesterdayValue.textContent = formatDay(yesterday);
 
   document.querySelector('#APP').style.opacity = '1';
+});
+
+themeShifter.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  document.cookie != '-' ? (document.cookie = '-') : (document.cookie = 'dark');
 });
 
 excelInput.addEventListener('change', (e) => {
@@ -67,7 +77,7 @@ startButton.addEventListener('click', () => {
 
     showOnDashboard(formatedData);
     modalButton.disabled = false;
-    textArea.textContent = formatedData.report
+    textArea.textContent = formatedData.report;
   };
 
   reader.readAsArrayBuffer(archivo);
