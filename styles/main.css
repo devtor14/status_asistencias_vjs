@@ -30,8 +30,8 @@ body #theme-shifter {
   padding: var(--md-spacing);
 
   position: absolute;
-  right: var(--lg-spacing);
-  bottom: var(--lg-spacing);
+  right: var(--md-spacing);
+  bottom: var(--md-spacing);
   z-index: 2;
 
   background-color: var(--secondary);
@@ -43,6 +43,7 @@ body #theme-shifter {
 body #theme-shifter svg {
   width: var(--lg-text);
   height: var(--lg-text);
+  transform: rotate(15deg);
 }
 body #theme-shifter:hover {
   cursor: pointer;
@@ -182,7 +183,7 @@ button:disabled {
 }
 .file-section label figure svg {
   width: var(--lg-text);
-  fill: var(--card);
+  fill: #fff;
 }
 .file-section label:hover {
   border-style: solid;
@@ -250,7 +251,7 @@ button:disabled {
   font-weight: 600;
 }
 .day-section section input[type='radio']:checked + label {
-  color: var(--card);
+  color: #fff;
   background-color: var(--primary);
 }
 
@@ -281,6 +282,7 @@ button:disabled {
 }
 .overview-section button:nth-child(2) {
   height: 100%;
+  color: #fff;
 }
 .overview-section button:nth-child(3) {
   color: var(--text);
