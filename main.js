@@ -1,4 +1,4 @@
-import { processData, formatSummary } from './helpers/index.js';
+import { processData, formatSummary, alertHandler } from './helpers/index.js';
 
 const excelInput = document.querySelector('#file-input');
 const yesterdayInput = document.querySelector('#yesterday');
@@ -59,21 +59,26 @@ startButton.addEventListener('click', () => {
   const archivo = excelInput.files[0];
   const date = document.querySelector('input[type="radio"]:checked')?.value;
 
-  if (!archivo) return alert('Debes cargar un archivo');
+  if (!archivo) return alertHandler('Debes cargar un archivo de Asistencias válido.');
 
   const reader = new FileReader();
+
   reader.onload = (evento) => {
-    const data = new Uint8Array(evento.target.result);
-    const workbook = XLSX.read(data, { type: 'array', cellDates: true });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const dataJSON = XLSX.utils.sheet_to_json(sheet);
+    try {
+      const data = new Uint8Array(evento.target.result);
+      const workbook = XLSX.read(data, { type: 'array', cellDates: true });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const dataJSON = XLSX.utils.sheet_to_json(sheet);
 
-    const [stages, sumary] = processData(dataJSON, date);
-    formatedData = formatSummary(stages, sumary);
+      const [stages, sumary] = processData(dataJSON, date);
+      formatedData = formatSummary(stages, sumary);
 
-    showOnDashboard(formatedData);
-    modalButton.disabled = false;
-    textArea.textContent = formatedData.report;
+      showOnDashboard(formatedData);
+      modalButton.disabled = false;
+      textArea.textContent = formatedData.report;
+    } catch {
+      alertHandler('No es posible procesar el archivo cargado, por favor carga un archivo válido.');
+    }
   };
 
   reader.readAsArrayBuffer(archivo);
@@ -88,9 +93,9 @@ modalButton.addEventListener('click', () => {
 copyButton.addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(formatedData.report);
-    alert('Datos copiados al portapapeles');
+    alertHandler('Reporte copiado al Portapapeles.');
   } catch (err) {
-    console.error('Error al intentar copiar:', err);
+    alertHandler('Hubo un error al intentar copiar el Reporte.');
   }
 });
 

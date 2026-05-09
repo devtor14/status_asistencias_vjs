@@ -127,7 +127,7 @@ button {
   align-items: center;
 
   background-color: var(--primary);
-  color: var(--card);
+  color: var(--text);
   fill: var(--card);
 
   font-weight: 600;
@@ -285,7 +285,6 @@ button:disabled {
   color: #fff;
 }
 .overview-section button:nth-child(3) {
-  color: var(--text);
   fill: var(--text);
   background-color: var(--gray);
 }
@@ -415,8 +414,10 @@ button:disabled {
 #modal main div button {
   width: fit-content;
   height: fit-content;
-
   padding: var(--sm-text);
+
+  color: #fff;
+
   border-radius: var(--sm-text);
 }
 #modal main div button svg {
@@ -448,4 +449,41 @@ button:disabled {
   resize: none;
 
   background-color: transparent;
+}
+
+#alert {
+  width: 400px;
+  height: fit-content;
+  position: absolute;
+  top: var(--md-spacing);
+  left: var(--md-spacing);
+
+  font-weight: 500;
+  line-height: 1.25;
+
+  z-index: 10;
+}
+#alert.show {
+  animation: moveIn 0.6s ease-in-out forwards;
+}
+#alert.hide {
+  animation: moveOut 0.6s ease-in-out forwards;
+}
+
+@keyframes moveIn {
+  from {
+    transform: translateX(-200%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200%);
+  }
 }
