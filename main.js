@@ -90,6 +90,21 @@ modalButton.addEventListener('click', () => {
   modalButton.disabled = true;
 });
 
+textArea.addEventListener(
+  'input',
+  (() => {
+    let timeoutId;
+
+    return (e) => {
+      clearTimeout(timeoutId);
+
+      timeoutId = setTimeout(() => {
+        formatedData.report = e.target.value;
+      }, 500);
+    };
+  })(),
+);
+
 copyButton.addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(formatedData.report);
