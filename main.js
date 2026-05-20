@@ -99,6 +99,7 @@ textArea.addEventListener(
       clearTimeout(timeoutId);
 
       timeoutId = setTimeout(() => {
+        if (!e.target.value) return;
         formatedData.report = e.target.value;
       }, 500);
     };
