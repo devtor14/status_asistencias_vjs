@@ -1,4 +1,5 @@
 export const GLOBAL_CONFIG = [
+  { id: 'Emprendimiento Ángel Gonźalez 60', label: 'ANGEL GONZALEZ 60', type: 'simple' },
   { id: 'CG SERVICIOS', label: 'CG SERVICIOS', type: 'simple' },
   { id: 'Dainee Yanibeth Zambrano Torres', label: 'DAINEE ZAMBRANO', type: 'simple' },
   { id: 'GRUPO ARLO SYSTEM', label: 'GRUPO ARLO', type: 'simple' },
@@ -31,6 +32,7 @@ export const DEFAULT_SUMMARY = () => ({
   'LATIN TELECOM': 0,
   'CG SERVICIOS': 0,
   'Moisés Enmanuel Urbina Villarreal': 0,
+  'Emprendimiento Ángel Gonźalez 60': 0,
   'Emprendimiento Jerlix Colmenares': 0,
   'Jonayker Daniel Mendoza Pérez': 0,
   'Óscar Eduardo Henriquez Zambrano': 0,

@@ -71,6 +71,7 @@ startButton.addEventListener('click', () => {
       const dataJSON = XLSX.utils.sheet_to_json(sheet);
 
       const [stages, sumary] = processData(dataJSON, date);
+      console.log(stages, sumary);
       formatedData = formatSummary(stages, sumary);
 
       showOnDashboard(formatedData);
