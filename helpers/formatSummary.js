@@ -53,7 +53,9 @@ ${teamsHtml}
 
 ▪️ _Asistencias En Progreso:_ *${stages['En Progreso']?.amount || 0}*
 ▪️ _Asistencias Por Facturar:_ *${stages['Por facturar']?.amount || 0}*
-▪️ _Clientes atendidos Hoy:_ *${stages['Por facturar'].content.length + stages.Hecho.content.length}*`;
+▪️ _Clientes atendidos Hoy:_ *${stages['Por facturar'].content.length + stages.Hecho.content.length}*
+
+\`\`\`Data procesada por AsysCheck\`\`\``;
 
   return { summary: generalSummary, report };
 };
