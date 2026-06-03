@@ -16,6 +16,7 @@ const processData = (dataList, dateToEval) => {
 
   const summary = countTeamsTasks(stages.Asignado.content, DEFAULT_SUMMARY);
 
+  console.log(stages);
   return [stages, summary];
 };
 

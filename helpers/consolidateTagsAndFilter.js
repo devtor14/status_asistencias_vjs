@@ -2,7 +2,7 @@ const consolidateTagsAndFilter = (content) => {
   let lastValidIndex = null;
 
   return content.filter((element, index) => {
-    if (Object.keys(element).length === 4) {
+    if (Object.keys(element).length > 1) {
       lastValidIndex = index;
       return true;
     }

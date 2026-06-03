@@ -3,7 +3,7 @@ const parseStages = (dataList) => {
   let lastHeaderName = '';
 
   dataList.forEach((element) => {
-    const match = /^(.+?)\s*\((\d+)\)$/i.exec(element.Etapa);
+    const match = /^(.+?)\s*\((\d+)\)$/i.exec(element[Object.keys(element)[0]]);
 
     if (match) {
       const [_, headerName, headerAmount] = match;
@@ -11,7 +11,12 @@ const parseStages = (dataList) => {
 
       lastHeaderName = name;
       stages[name] = { amount: headerAmount.trim(), content: [] };
-    } else if (lastHeaderName) {
+    } else {
+      delete element.Actividades;
+      delete element.Calle;
+      delete element.Estado;
+      delete element.Prioridad;
+
       stages[lastHeaderName].content.push(element);
     }
   });
