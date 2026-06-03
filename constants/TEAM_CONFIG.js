@@ -1,5 +1,5 @@
 export const GLOBAL_CONFIG = [
-  { id: 'Emprendimiento Ángel Gonźalez 60', label: 'ANGEL GONZALEZ 60', type: 'simple' },
+  { id: 'Emprendimiento Ángel Gonźalez 60', label: 'ANGEL GONZALEZ', type: 'simple' },
   { id: 'CG SERVICIOS', label: 'CG SERVICIOS', type: 'simple' },
   { id: 'Dainee Yanibeth Zambrano Torres', label: 'DAINEE ZAMBRANO', type: 'simple' },
   { id: 'GRUPO ARLO SYSTEM', label: 'GRUPO ARLO', type: 'simple' },
