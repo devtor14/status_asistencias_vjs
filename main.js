@@ -77,7 +77,7 @@ startButton.addEventListener('click', () => {
       modalButton.disabled = false;
       textArea.textContent = formatedData.report;
 
-      console.log('DEPURACIÓN PARA DESARROLLADOR \n', stages, summary);
+      console.log('DEPURACIÓN PARA DESARROLLADOR \n', stages, sumary);
     } catch (error) {
       alertHandler('No es posible procesar el archivo cargado, por favor carga un archivo válido.');
       console.warn(error);
