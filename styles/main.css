@@ -460,6 +460,7 @@ button:disabled {
 
   font-weight: 500;
   line-height: 1.25;
+  white-space: pre-line;
 
   z-index: 10;
 }

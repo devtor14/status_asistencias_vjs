@@ -55,7 +55,7 @@ ${teamsHtml}
 ▪️ _Asistencias Por Facturar:_ *${stages['Por facturar']?.amount || 0}*
 ▪️ _Clientes atendidos Hoy:_ *${stages['Por facturar'].content.length + stages.Hecho.content.length}*
 
-\`\`\`Procesada por AsysCheck 🤖\`\`\``;
+\`\`\`Procesado por AsysCheck 🤖\`\`\``;
 
   return { summary: generalSummary, report };
 };

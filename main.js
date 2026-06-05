@@ -68,19 +68,29 @@ startButton.addEventListener('click', () => {
       const data = new Uint8Array(evento.target.result);
       const workbook = XLSX.read(data, { type: 'array', cellDates: true });
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
-      const dataJSON = XLSX.utils.sheet_to_json(sheet);
+      const excelJSON = XLSX.utils.sheet_to_json(sheet);
+      const excelColumns = XLSX.utils.sheet_to_json(sheet, { header: 1 })[0];
 
-      const [stages, sumary] = processData(dataJSON, date);
-      formatedData = formatSummary(stages, sumary);
+      const requireColumns = ['Título', 'Etapa', 'Personas asignadas', 'Etiquetas', 'Fecha límite'];
+      const missingColumns = requireColumns.filter((item) => !excelColumns.includes(item));
+
+      if (missingColumns.length > 0) {
+        throw `Faltan las siguientes columnas en el archivo:\n\n ${missingColumns.join('\n ')}`;
+      }
+
+      const [stages, summary] = processData(excelJSON, date);
+      formatedData = formatSummary(stages, summary);
 
       showOnDashboard(formatedData);
       modalButton.disabled = false;
       textArea.textContent = formatedData.report;
 
-      console.log('DEPURACIÓN PARA DESARROLLADOR \n', stages, sumary);
+      console.group('DEPURACIÓN PARA DESARROLLADOR');
+      console.log('RAW DATA', excelJSON);
+      console.log('STAGES', stages);
+      console.log('SUMMARY', summary);
     } catch (error) {
-      alertHandler('No es posible procesar el archivo cargado, por favor carga un archivo válido.');
-      console.warn(error);
+      alertHandler(error);
     }
   };
 

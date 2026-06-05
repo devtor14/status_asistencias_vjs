@@ -21,7 +21,7 @@ function alertHandler(message) {
       },
       { once: true },
     );
-  }, 4000);
+  }, 5000);
 }
 
 export { alertHandler };

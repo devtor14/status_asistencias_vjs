@@ -3,6 +3,16 @@ const consolidateTagsAndFilter = (content) => {
 
   return content.filter((element, index) => {
     if (Object.keys(element).length > 1) {
+      if (!element['Personas asignadas']) {
+        throw `${element.Título}\n\n No está asignada a ninguna cuadrilla.`;
+      }
+      if (!element['Etiquetas']) {
+        throw `${element.Título}\n\n No tiene Etiquetas`;
+      }
+      if (!element['Fecha límite']) {
+        throw `${element.Título}\n\n No tiene fecha límite`;
+      }
+
       lastValidIndex = index;
       return true;
     }
