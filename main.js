@@ -147,19 +147,16 @@ function createContratistaItem(item) {
 
   if (item.value && item.description) li.title = item.description;
 
-  if (item.label == 'SMARTLIFE' || item.label == 'TERASERVICES PUERTO') {
-    li.className = 'low-value';
-    return li;
-  }
-  if (item.label == 'KENNY RODRIGUEZ') {
-    if (item.value == 2) li.className = 'mid-value';
-    if (item.value >= 3) li.className = 'high-value';
+  if (item.value > 0) li.className = 'low-value';
+  if (item.label == 'SMARTLIFE' || item.label == 'TERASERVICES PUERTO') return li;
+  if (item.label == 'INVERSIONES PEÑALVA' || item.label == 'LFM CONSULTOR') {
+    if (item.value > 5) li.className = 'mid-value';
+    if (item.value >= 7) li.className = 'high-value';
     return li;
   }
 
-  if (item.value > 0) li.className = 'low-value';
-  if (item.value > 4) li.className = 'mid-value';
-  if (item.value > 7) li.className = 'high-value';
+  if (item.value >= 2) li.className = 'mid-value';
+  if (item.value > 4) li.className = 'high-value';
 
   return li;
 }
