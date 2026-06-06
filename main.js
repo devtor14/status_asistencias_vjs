@@ -143,8 +143,6 @@ function createContratistaItem(item) {
   li.appendChild(firstSpan);
   li.appendChild(div);
 
-  console.log(item);
-
   if (item.value && item.description) li.title = item.description;
 
   if (item.value > 0) li.className = 'low-value';
