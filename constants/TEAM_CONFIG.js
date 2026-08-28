@@ -31,6 +31,7 @@ export const DEFAULT_SUMMARY = () => ({
   "INVERSIONES PENALVA 2022": 0,
   "TELECOMUNICACIONES K. SUAREZ": 0,
   "Marcial Venancio Rodríguez González": 0,
+  "MODE TECHMETAL., C.A.": 0,
   "LATIN TELECOM": 0,
   "CG SERVICIOS": 0,
   "Moisés Enmanuel Urbina Villarreal": 0,
