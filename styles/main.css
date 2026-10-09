@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 :root {
   --body: #f8fafc;
@@ -69,39 +69,37 @@ body {
 
   color: var(--text);
   background-color: var(--body);
+  transition: all 0.3s ease-in-out;
 }
 body > main {
   width: 100%;
   height: 100%;
-  max-width: 1366px;
-  max-height: 768px;
   padding: var(--lg-spacing);
-  position: fixed;
-  top: 50%;
-  bottom: 50%;
 
   display: grid;
-  grid-template-columns: auto 1fr;
+  place-items: center;
+  /* grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     'file-section overview-section'
     'day-section overview-section';
   gap: var(--lg-spacing);
-  place-self: center;
+  place-self: center; */
 
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: var(--md-text);
 
   opacity: 0;
-  transition: opacity 0.3s ease-in;
+  transition: all 0.3s ease-in-out;
 }
 
 .card {
-  height: 100%;
+  /* height: 100%; */
   padding: var(--lg-spacing);
   position: relative;
 
   display: flex;
+  align-items: center;
   flex-direction: column;
 
   background-color: var(--card);
@@ -118,7 +116,8 @@ body > main {
   opacity: 0.8;
   margin-bottom: var(--lg-spacing);
 }
-button {
+a {
+  width: 100%;
   height: fit-content;
   padding: var(--md-spacing);
 
@@ -133,6 +132,7 @@ button {
   font-weight: 600;
   border-radius: var(--md-spacing);
   cursor: pointer;
+  text-decoration: none;
 
   transition: all 0.3s ease-in-out;
 }
@@ -168,7 +168,7 @@ button:disabled {
 
   border: 2px dashed var(--secondary);
   border-radius: var(--md-spacing);
-  transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in-out;
 }
 .file-section label figure {
   width: 3rem;
@@ -250,7 +250,7 @@ button:disabled {
 .day-section section label span:nth-child(2) {
   font-weight: 600;
 }
-.day-section section input[type='radio']:checked + label {
+.day-section section input[type="radio"]:checked + label {
   color: #fff;
   background-color: var(--primary);
 }
